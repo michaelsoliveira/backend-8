@@ -10,23 +10,23 @@ export async function list() {
     return prisma.user.findMany({ orderBy: { id: 'asc' } });
 }
 
-export async function getById(id: number) {
+export async function getById(id: string) {
     return prisma.user.findUnique({ where: { id } })
 }
 
 export async function create(
-    data: { email: string; name?: string | null; password: string}
+    data: { email: string; name?: string | null; password: string, image?: string | null}
 ) {
     return prisma.user.create({ data });
 }
 
-export async function update(id: number, data: User) {
+export async function update(id: string, data: User) {
     return prisma.user.update({
         where: { id },
         data
     });
 }
 
-export async function remove(id: number) {
+export async function remove(id: string) {
     return prisma.user.delete({ where: { id } })
 }

@@ -7,27 +7,27 @@ export async function list(req: Request, res: Response) {
 }
 
 export const getById = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
+    const id = String(req.params.id);
     const user = await UsersService.getById(id);
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
 }
 
 export const create = async (req: Request, res: Response) => {
-    const { email, name, password } = req.body;
+    const { email, name, password, image } = req.body;
     if (!email || !password) {
         return res.status(400).json({
             message: 'email e password são obrigatórios'
         });
     }
     const user = await UsersService.create({
-        email, name, password
+        email, name, password, image
     });
     res.status(201).json(user);
 }
 
 export const update = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
+    const id = String(req.params.id);
     const { email, name, password } = req.body;
     try {
         const user = await UsersService.update(
@@ -43,7 +43,7 @@ export const update = async (req: Request, res: Response) => {
 }
 
 export const remove = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
+    const id = String(req.params.id);
     try {
         const user = await UsersService.remove(id);
         res.status(204).send();

@@ -4,6 +4,7 @@ type User = {
     email?: string;
     name?: string | null;
     password?: string;
+    image?: string | null
 }
 
 export async function list() {

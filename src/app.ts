@@ -11,5 +11,5 @@ app.get('/health', (req: any, res: any) => {
     res.json({ ok: true, uptime: process.uptime() })
 });
 
-app.use('/', routes);
+app.use('/api', routes);
 export default app;
